@@ -5,26 +5,16 @@ import com.hodges.kevin.nasa_kotlin.di.appcomponent.DaggerAppComponent
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasAndroidInjector
+import dagger.android.support.DaggerApplication
 import javax.inject.Inject
 
-class MyApplication: Application(), HasAndroidInjector {
+class MyApplication: DaggerApplication() {
+
+    override fun applicationInjector(): AndroidInjector<out DaggerApplication> =
+        DaggerAppComponent.builder().create(this)
 
     @Inject
     lateinit var androidInjector : DispatchingAndroidInjector<Any>
 
     override fun androidInjector(): AndroidInjector<Any> = androidInjector
-
-    override fun onCreate() {
-        super.onCreate()
-
-        initDagger()
-    }
-
-    private fun initDagger() {
-        DaggerAppComponent
-            .builder()
-            .application(this)
-            .build()
-            .inject(this)
-    }
 }

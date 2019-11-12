@@ -2,27 +2,29 @@ package com.hodges.kevin.nasa_kotlin.di.appcomponent
 
 import android.app.Application
 import com.hodges.kevin.nasa_kotlin.MyApplication
+import com.hodges.kevin.nasa_kotlin.di.module.ActivityModule
+import com.hodges.kevin.nasa_kotlin.di.module.AppModule
 import com.hodges.kevin.nasa_kotlin.di.module.ViewModelFactoryModule
 import com.hodges.kevin.nasa_kotlin.di.module.ViewModelModule
 import com.hodges.kevin.nasa_kotlin.view.MainActivity
 import dagger.BindsInstance
 import dagger.Component
+import dagger.android.AndroidInjectionModule
+import dagger.android.AndroidInjector
 import dagger.android.support.AndroidSupportInjectionModule
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules = [
-    ViewModelModule::class,
-    AndroidSupportInjectionModule::class])
-interface AppComponent {
+@Component(
+    modules = [
+        AndroidInjectionModule::class,
+        AndroidSupportInjectionModule::class,
+        ViewModelModule::class,
+        ActivityModule::class
+    ]
+)
+internal interface AppComponent: AndroidInjector<MyApplication> {
 
     @Component.Builder
-    interface Builder {
-
-        @BindsInstance
-        fun application(application: Application): Builder
-        fun build(): AppComponent
-    }
-
-    fun inject(myApplication: MyApplication)
+    abstract class Builder : AndroidInjector.Builder<MyApplication>()
 }

@@ -15,8 +15,8 @@ abstract class ViewModelFactoryModule {
     @Binds
     abstract fun bindViewModelFactory(viewModelFactory: ViewModelFactory): ViewModelProvider.Factory
 
-    @Binds
-    @IntoMap
-    @ViewModelKey(NasaViewModel::class)
-    abstract fun bindNasaViewModel(nasaViewModel: NasaViewModel): ViewModel
+//    @Binds
+//    @IntoMap
+//    @ViewModelKey(NasaViewModel::class)
+//    abstract fun bindNasaViewModel(nasaViewModel: NasaViewModel): ViewModel
 }
