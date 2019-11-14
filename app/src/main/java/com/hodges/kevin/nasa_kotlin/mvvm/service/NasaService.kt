@@ -1,6 +1,6 @@
 package com.hodges.kevin.nasa_kotlin.mvvm.service
 
-class NasaService {
+interface NasaService {
 
 //    @GET("lego/themes/")
 //    suspend fun getThemes(@Query("page") page: Int? = null,
@@ -15,4 +15,6 @@ class NasaService {
 //
 //    @GET("lego/sets/{id}/")
 //    suspend fun getSet(@Path("id") id: String): Response<LegoSet>
+
+    fun getAPOD(): String = "Here is the Data"
 }

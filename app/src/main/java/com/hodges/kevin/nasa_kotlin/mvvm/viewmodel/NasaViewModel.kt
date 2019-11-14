@@ -1,16 +1,18 @@
 package com.hodges.kevin.nasa_kotlin.mvvm.viewmodel
 
-import android.content.Context
-import android.widget.Toast
-import android.widget.Toast.LENGTH_LONG
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import java.time.Duration
+import com.hodges.kevin.nasa_kotlin.mvvm.datasource.NasaDataSource
 import javax.inject.Inject
 
-class NasaViewModel @Inject constructor(
+class NasaViewModel
+@Inject constructor(private val nasaDataSource: NasaDataSource
 ) : ViewModel() {
 
-    fun makeToast() {
-//        Toast.makeText(context, "Some messsage", LENGTH_LONG).show()
+    var myLiveData: MutableLiveData<String> = MutableLiveData()
+
+    fun getAPOD() {
+        val data: String = nasaDataSource.getAPOD()
+        myLiveData.postValue(data)
     }
 }
